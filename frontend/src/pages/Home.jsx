@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userDataContext } from "../context/userContext";
+import { userDataContext } from "../context/UserContext";
 import aiImg from "../assets/ai.gif";
 import userImg from "../assets/user.gif";
 import { RiMenuUnfold4Line } from "react-icons/ri";
