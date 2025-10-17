@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import { FaUpload } from "react-icons/fa6";
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
