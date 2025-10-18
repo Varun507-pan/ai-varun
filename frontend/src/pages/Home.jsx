@@ -7,7 +7,7 @@ import { RiMenuUnfold4Line } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 
 const Home = () => {
-  const { userData } = useContext(userDataContext);
+  const { userData, logout } = useContext(userDataContext);
   const navigate = useNavigate();
   const [userText, setUserText] = useState("");
   const [aiText, setAiText] = useState("");
@@ -44,13 +44,18 @@ const Home = () => {
   const getImageSrc = (img) => {
     if (!img) return null;
     if (img.startsWith("http://") || img.startsWith("https://")) return img;
-    if (img.startsWith("/public")) return `http://localhost:5000${img}`;
+    if (img.startsWith("/public")) return `https://ai-varun1.onrender.com${img}`;
     if (img.startsWith("/")) return img;
-    return `http://localhost:5000/public/${img}`;
+    return `https://ai-varun1.onrender.com/public/${img}`;
   };
 
   const handleCustomize = () => navigate("/customize");
-  const handleLogout = () => navigate("/login");
+ const handleLogout = async () => {
+  await logout()
+
+  navigate("/login");
+};
+
 
   const detectLanguage = (text) => {
     const telugu = /[\u0C00-\u0C7F]/;
@@ -62,7 +67,7 @@ const Home = () => {
 
   const getGeminiResponseWithLang = async (command, lang = "en-IN") => {
     try {
-      const response = await fetch("http://localhost:5000/api/gemini", {
+      const response = await fetch("https://ai-varun1.onrender.com/api/gemini", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

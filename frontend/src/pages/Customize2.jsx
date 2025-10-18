@@ -24,7 +24,7 @@ const Customize2 = () => {
         formData.append("imageUrl", selectedImage);
       }
 
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       const headers = { "Content-Type": "multipart/form-data" };
       if (token) headers.Authorization = `Bearer ${token}`;

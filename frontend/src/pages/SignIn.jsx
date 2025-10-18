@@ -27,7 +27,7 @@ const SignIn = () => {
       );
 
       setUserData(result.data.user);
-      if (result.data.token) localStorage.setItem("token", result.data.token);
+      if (result.data.token) sessionStorage.setItem("token", result.data.token);
       setMessage("Login successful!");
       navigate("/customize");
     } catch (error) {

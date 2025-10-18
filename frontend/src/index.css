@@ -1,16 +1,208 @@
+/* Import Tailwind */
 @import "tailwindcss";
 
-/* index.css */
+/* Base Setup */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at 50% 50%, #0a0a0f, #050506 80%);
+}
 
-@keyframes gradient-bg {
+/* Canvas Layer (for any 3D/particle canvas) */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
+
+/* =============================== */
+/* 🌌 3D GRADIENT SKY ANIMATION */
+/* =============================== */
+@keyframes gradient-sky {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  50% { background-position: 100% 50%; filter: hue-rotate(30deg); }
+  100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+}
+
+.gradient-animated {
+  background: linear-gradient(270deg, #0f172a, #1e1b4b, #312e81, #4c1d95);
+  background-size: 400% 400%;
+  animation: gradient-sky 18s ease infinite;
+}
+
+/* =============================== */
+/* ✨ Glow Border / Hover Effects */
+/* =============================== */
+.glow-border {
+  box-shadow: 0 0 25px rgba(147, 51, 234, 0.7),
+              0 0 45px rgba(59, 130, 246, 0.5);
+}
+
+.assistant-wrapper {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.assistant-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.7);
+}
+
+/* =============================== */
+/* ⛰️ MOUNTAIN LAYERS (Depth Effect) */
+/* =============================== */
+.mountain {
+  position: absolute;
+  bottom: 0;
+  width: 130%;
+  height: 220px;
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-10%);
+  filter: blur(1px);
+}
+
+.mountain1 {
+  background: #120c2c;
+  z-index: 1;
+  bottom: 0;
+}
+
+.mountain2 {
+  background: #1b1441;
+  z-index: 2;
+  bottom: 70px;
+}
+
+.mountain3 {
+  background: #2a1d5f;
+  z-index: 3;
+  bottom: 130px;
+}
+
+/* =============================== */
+/* ☁️ CLOUDS FLOATING ACROSS SKY */
+/* =============================== */
+@keyframes cloudMove {
+  0% { transform: translateX(-150px); opacity: 0.6; }
+  50% { opacity: 0.8; }
+  100% { transform: translateX(100vw); opacity: 0.6; }
+}
+
+.cloud {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(8px);
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 5;
+  animation: cloudMove 90s linear infinite;
+}
+
+.cloud1 { top: 6rem; left: 3rem; width: 9rem; height: 3.2rem; animation-delay: 0s; }
+.cloud2 { top: 10rem; right: 6rem; width: 11rem; height: 4rem; animation-delay: 20s; }
+.cloud3 { top: 14rem; left: 50%; width: 12rem; height: 3rem; animation-delay: 40s; }
+
+/* =============================== */
+/* 🌞 FLOATING SUN (Soft Pulse) */
+/* =============================== */
+@keyframes sunFloat {
+  0% { transform: translateX(50%) translateY(0); filter: brightness(1); }
+  50% { transform: translateX(50%) translateY(-15px); filter: brightness(1.3); }
+  100% { transform: translateX(50%) translateY(0); filter: brightness(1); }
+}
+
+.sun {
+  position: absolute;
+  bottom: 7rem;
+  right: 50%;
+  transform: translateX(50%);
+  width: 9rem;
+  height: 9rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #ffb400 40%, #ff6a00 80%);
+  box-shadow: 0 0 80px 25px rgba(255, 196, 0, 0.3);
+  z-index: 8;
+  animation: sunFloat 5s ease-in-out infinite;
+}
+
+/* =============================== */
+/* 🌲 TREES FOREGROUND LAYER */
+/* =============================== */
+.tree {
+  position: absolute;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  z-index: 9;
+}
+
+.tree1 { bottom: 0; left: 2rem; width: 2rem; height: 6rem; background: #065f46; }
+.tree2 { bottom: 0; left: 7rem; width: 2.5rem; height: 8rem; background: #064e3b; }
+.tree3 { bottom: 0; right: 5rem; width: 1.5rem; height: 5rem; background: #047857; }
+.tree4 { bottom: 0; right: 9rem; width: 3rem; height: 9rem; background: #065f46; }
+
+/* =============================== */
+/* 🕊️ FLYING BIRDS */
+/* =============================== */
+@keyframes birdFly {
+  0% { transform: translateX(-10vw) translateY(0); }
+  50% { transform: translateX(50vw) translateY(-30px); }
+  100% { transform: translateX(110vw) translateY(0); }
+}
+
+.extra-bird {
+  position: absolute;
+  top: 5rem;
+  left: -10vw;
+  width: 3rem;
+  height: 3rem;
+  background: url("https://cdn-icons-png.flaticon.com/512/616/616408.png") no-repeat center/contain;
+  z-index: 15;
+  animation: birdFly 25s linear infinite;
+  opacity: 0.9;
+}
+
+/* =============================== */
+/* ✨ ANIMATED CARD BACKGROUND */
+/* =============================== */
+@keyframes gradient-move {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-.gradient-animated {
-  background: linear-gradient(270deg, #a18cd1, #fbc2eb, #8fd3f4, #667eea);
-  background-size: 800% 800%;
-  animation: gradient-bg 15s ease infinite;
+.animated-card-bg {
+  background: linear-gradient(
+    to bottom right,
+    rgba(49, 46, 129, 0.8),
+    rgba(109, 40, 217, 0.6),
+    rgba(236, 72, 153, 0.5)
+  );
+  background-size: 200% 200%;
+  animation: gradient-move 8s ease infinite;
+  border-radius: 1rem;
+  inset: 0;
+  position: absolute;
+  z-index: 0;
 }
 
+/* =============================== */
+/* 🌁 DEPTH PARALLAX EFFECT */
+/* =============================== */
+.bg-layers {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -5;
+}
+
+.bg-layers > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

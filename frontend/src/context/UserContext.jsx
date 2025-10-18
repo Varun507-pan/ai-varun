@@ -24,7 +24,7 @@ const UserContext = ({ children }) => {
     } catch (cookieErr) {
       // Fallback: token-based authentication
       try {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         if (!token) {
           setUserData(null);
           return;
@@ -68,7 +68,7 @@ const UserContext = ({ children }) => {
       { withCredentials: true }
     );
     setUserData(res.data.user);
-    localStorage.setItem("token", res.data.token);
+    sessionStorage.setItem("token", res.data.token);
     return res.data;
   };
 
@@ -80,7 +80,7 @@ const UserContext = ({ children }) => {
       { withCredentials: true }
     );
     setUserData(res.data.user);
-    localStorage.setItem("token", res.data.token);
+    sessionStorage.setItem("token", res.data.token);
     return res.data;
   };
 
@@ -88,7 +88,7 @@ const UserContext = ({ children }) => {
   const logout = async () => {
     await axios.get(`${serverUrl}/api/auth/logout`, { withCredentials: true }); // GET is correct as in backend
     setUserData(null);
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
   };
 
   return (
